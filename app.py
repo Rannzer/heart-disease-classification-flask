@@ -12,13 +12,16 @@ def hello_world():
 
 @app.route("/predict", methods = ["POST"])
 def predict():
+    print(request.form)
     float_features = [float(x) for x in request.form.values()]
     features = [np.array(float_features)]
     prediction = model.predict(features)
 
     output = prediction
 
-    if(output == 2):
+    print(output)
+
+    if(output == 1):
         return render_template("index.html",result = "The patient has Heart Disease")
     else:
         return render_template("index.html",result = "The patient does not have Heart Disease")
